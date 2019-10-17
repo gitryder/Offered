@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Offered</string>
+
+    <string name="hint_donor_name">Donor Name</string>
+    <string name="hint_donation_amount">Donation Amount</string>
+    <string name="text_rupee_symbol">₹</string>
+    <string name="placeholder_total_donated_amount">0</string>
+    <string name="text_view_all_donors">View All Donors</string>
+
+</resources>
