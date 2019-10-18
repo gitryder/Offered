@@ -1,6 +1,7 @@
 package com.realllydan.offered.ui
 
 import android.app.Activity
+import android.graphics.Paint
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
@@ -22,7 +23,6 @@ class MakeDonationActivity : AppCompatActivity(), MakeDonationView {
     }
 
     private val textViewTotalDonationAmount by bind<TextView>(R.id.tvTotalDonatedAmount)
-    private val textViewLinkToAllDonors by bind<TextView>(R.id.tvLinkToAllDonors)
     private val editTextDonorName by bind<TextInputEditText>(R.id.etDonorName)
     private val editTextDonationAmount by bind<TextInputEditText>(R.id.etDonationAmount)
     private val buttonAddDonation by bind<ImageView>(R.id.ivAddToTotalAmount)
@@ -55,8 +55,10 @@ class MakeDonationActivity : AppCompatActivity(), MakeDonationView {
         }
     }
 
-    private fun textInputFieldsAreNotEmpty() = !editTextDonorName.text.isNullOrEmpty()
+    private fun textInputFieldsAreNotEmpty() = (
+            !editTextDonorName.text.isNullOrEmpty()
             && !editTextDonationAmount.text.isNullOrEmpty()
+    )
 
     private fun getDonationDetailsFromTextInputs() = Donation().apply {
         donorName = editTextDonorName.text.toString()

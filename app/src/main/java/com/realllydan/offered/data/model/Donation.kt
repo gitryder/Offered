@@ -1,5 +1,8 @@
 package com.realllydan.offered.data.model
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
 /**
  * A Kotlin data class to model the donation given by a user
  *
@@ -9,6 +12,8 @@ package com.realllydan.offered.data.model
  *
  * */
 
+@Parcelize
 data class Donation (
-    var donorName: String = "", var donationAmount: Int = 0
-)
+    var donorName: String = "",
+    var donationAmount: Int = 0
+) : Parcelable
