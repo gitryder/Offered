@@ -18,9 +18,12 @@ class MakeDonationPresenter constructor(view: MakeDonationView) {
         view.displayTotalDonationAmount(getCalculatedTotalDonationAmount())
     }
 
-    fun getCalculatedTotalDonationAmount(): Int {
+    private fun getCalculatedTotalDonationAmount(): Int {
         var totalDonationAmount = 0
-        for (donation in allDonationsList) totalDonationAmount += donation.donationAmount
+
+        allDonationsList.forEach {
+            totalDonationAmount += it.donationAmount
+        }
         return totalDonationAmount
     }
 
