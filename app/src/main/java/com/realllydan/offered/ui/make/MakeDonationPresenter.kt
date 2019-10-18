@@ -1,4 +1,4 @@
-package com.realllydan.offered.ui
+package com.realllydan.offered.ui.make
 
 import com.realllydan.offered.data.model.Donation
 
@@ -10,12 +10,19 @@ class MakeDonationPresenter constructor(view: MakeDonationView) {
     fun addDonation(donation: Donation) {
 
         if (donation.isEmpty()) {
-            view.displayNoDonationDetailsAddedMessage()
+            view.displayMessageNoDonationDetailsAdded()
             return
         }
 
         allDonationsList.add(donation)
         view.displayTotalDonationAmount(getCalculatedTotalDonationAmount())
+    }
+
+    fun navigateToViewAllDonations() {
+        when (allDonationsList.isEmpty()) {
+            true -> view.displayMessageCannotNavigateSinceEmptyList()
+            else -> view.navigateToViewAllDonorsActivity(allDonationsList)
+        }
     }
 
     private fun getCalculatedTotalDonationAmount(): Int {
@@ -26,6 +33,7 @@ class MakeDonationPresenter constructor(view: MakeDonationView) {
         }
         return totalDonationAmount
     }
+
 
 
 }

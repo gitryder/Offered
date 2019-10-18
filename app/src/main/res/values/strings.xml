@@ -8,5 +8,9 @@
     <string name="text_view_all_donors">View All Donors</string>
 
     <string name="message_no_details_typed">Please type all required details</string>
+    <string name="message_no_donations_exist">There are no donations yet</string>
+
+    <string name="text_donor_name">Danyl Fernandes</string>
+    <string name="text_donation_amount">100</string>
 
 </resources>

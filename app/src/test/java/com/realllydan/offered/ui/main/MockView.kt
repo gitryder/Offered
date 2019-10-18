@@ -1,6 +1,7 @@
 package com.realllydan.offered.ui.main
 
-import com.realllydan.offered.ui.MakeDonationView
+import com.realllydan.offered.data.model.Donation
+import com.realllydan.offered.ui.make.MakeDonationView
 
 class MockView : MakeDonationView {
 
@@ -16,8 +17,15 @@ class MockView : MakeDonationView {
         totalCalculatedDonationAmount = donationAmount
     }
 
-    override fun displayNoDonationDetailsAddedMessage() {
+    override fun displayMessageNoDonationDetailsAdded() {
         hasDisplayedNoDonationDetailsAddedMessage = true
     }
 
+    override fun displayMessageCannotNavigateSinceEmptyList() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun navigateToViewAllDonorsActivity(allDonations: ArrayList<Donation>) {
+
+    }
 }

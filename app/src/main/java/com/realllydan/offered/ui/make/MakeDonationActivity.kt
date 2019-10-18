@@ -1,4 +1,4 @@
-package com.realllydan.offered.ui
+package com.realllydan.offered.ui.make
 
 import android.app.Activity
 import android.graphics.Paint
@@ -12,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.textfield.TextInputEditText
 import com.realllydan.offered.R
 import com.realllydan.offered.data.model.Donation
+import com.realllydan.offered.ui.view.ViewDonationsActivity
+import kotlinx.android.synthetic.main.activity_make_donation.*
 
 class MakeDonationActivity : AppCompatActivity(), MakeDonationView {
 
@@ -35,16 +37,24 @@ class MakeDonationActivity : AppCompatActivity(), MakeDonationView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_make_donation)
 
-        wireUpAddDonationButtonToAddNewDonation()
-        decorateLinkTextViewWithUnderline()
+        setupButtonToAddNewDonation()
+        setupTextViewLinkToAllDonations()
     }
 
     override fun displayTotalDonationAmount(donationAmount: Int) {
         textViewTotalDonationAmount.text = donationAmount.toString()
     }
 
-    override fun displayNoDonationDetailsAddedMessage() {
+    override fun displayMessageNoDonationDetailsAdded() {
         Toast.makeText(this, R.string.message_no_details_typed, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun displayMessageCannotNavigateSinceEmptyList() {
+        Toast.makeText(this, R.string.message_no_donations_exist, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun navigateToViewAllDonorsActivity(allDonations: ArrayList<Donation>) {
+        startActivity(ViewDonationsActivity.getStartIntent(this, allDonations))
     }
 
     private fun clearAllInputFields() {
@@ -52,24 +62,29 @@ class MakeDonationActivity : AppCompatActivity(), MakeDonationView {
         editTextDonationAmount.setText(EMPTY_TEXT_INPUT_PLACEHOLDER)
     }
 
-    private fun wireUpAddDonationButtonToAddNewDonation() {
+    private fun setupButtonToAddNewDonation() {
         buttonAddDonation.setOnClickListener {
-
-            if (textInputFieldsAreNotEmpty()) {
-                makeDonationPresenter.addDonation(getDonationDetailsFromTextInputs())
-                clearAllInputFields()
-            }
+            makeDonationPresenter.addDonation(getDonationDetailsFromTextInputs())
+            clearAllInputFields()
         }
     }
 
-    private fun textInputFieldsAreNotEmpty() = (
-            !editTextDonorName.text.isNullOrEmpty()
-            && !editTextDonationAmount.text.isNullOrEmpty()
-    )
+    private fun setupTextViewLinkToAllDonations() {
+        decorateLinkTextViewWithUnderline()
 
-    private fun getDonationDetailsFromTextInputs() = Donation().apply {
-        donorName = editTextDonorName.text.toString()
-        donationAmount = editTextDonationAmount.text.toString().toInt()
+        tvLinkToAllDonors.setOnClickListener {
+            makeDonationPresenter.navigateToViewAllDonations()
+        }
+    }
+
+    private fun getDonationDetailsFromTextInputs(): Donation {
+        val donorName = editTextDonorName.text.toString()
+        val donationAmount = editTextDonationAmount.text.toString()
+
+        return when (donationAmount.isEmpty()) {
+            true -> Donation(donorName, Donation.DEFAULT_DONATION_AMOUNT)
+            else -> Donation(donorName, donationAmount.toInt())
+        }
     }
 
     private fun decorateLinkTextViewWithUnderline() {

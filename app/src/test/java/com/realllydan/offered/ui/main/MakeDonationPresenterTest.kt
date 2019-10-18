@@ -1,15 +1,14 @@
 package com.realllydan.offered.ui.main
 
-import com.realllydan.offered.data.getEmptyMockDonationDetails
-import com.realllydan.offered.data.getMockDonationDetails
-import com.realllydan.offered.ui.MakeDonationPresenter
-import com.realllydan.offered.ui.MakeDonationView
+import com.realllydan.offered.data.*
+import com.realllydan.offered.ui.make.MakeDonationPresenter
+import com.realllydan.offered.ui.make.MakeDonationView
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito
-import org.mockito.Mockito.verify
+import org.mockito.Mockito.*
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
@@ -23,13 +22,14 @@ class MakeDonationPresenterTest {
     @Before
     fun beforeTest() {
         makeDonationView = Mockito.mock(MakeDonationView::class.java)
-        makeDonationPresenter = MakeDonationPresenter(makeDonationView)
+        makeDonationPresenter =
+            MakeDonationPresenter(makeDonationView)
     }
 
     @Test
     fun shouldDisplayNoDetailsAdded() {
         makeDonationPresenter.addDonation(getEmptyMockDonationDetails())
-        verify(makeDonationView).displayNoDonationDetailsAddedMessage()
+        verify(makeDonationView).displayMessageNoDonationDetailsAdded()
     }
 
     @Test
@@ -41,8 +41,18 @@ class MakeDonationPresenterTest {
         )
     }
 
-    fun shouldCorrectlyCalculateTotalDonationAmount() {
-        //TODO : Write test
+    @Test
+    fun shouldNavigateToAllDonationsActivity() {
+        makeDonationPresenter.navigateToViewAllDonations()
+
+        verify(makeDonationView).navigateToViewAllDonorsActivity(getDonationsArrayList())
+    }
+
+    @Test
+    fun shouldDisplayCannotNavigateSinceEmptyListMessage() {
+        makeDonationPresenter.navigateToViewAllDonations()
+
+        verify(makeDonationView).displayMessageCannotNavigateSinceEmptyList()
     }
 
 }

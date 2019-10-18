@@ -18,6 +18,10 @@ data class Donation (
     var donationAmount: Int = 0
 ) : Parcelable {
 
-    fun isEmpty() = donorName.isEmpty() || donationAmount.toString().isEmpty()
+    companion object {
+        const val DEFAULT_DONATION_AMOUNT = 0
+    }
+
+    fun isEmpty() = donorName.isEmpty() || donationAmount == DEFAULT_DONATION_AMOUNT
 
 }
