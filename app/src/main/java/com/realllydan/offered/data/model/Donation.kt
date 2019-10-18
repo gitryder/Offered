@@ -16,4 +16,8 @@ import kotlinx.android.parcel.Parcelize
 data class Donation (
     var donorName: String = "",
     var donationAmount: Int = 0
-) : Parcelable
+) : Parcelable {
+
+    fun isEmpty() = donorName.isEmpty() || donationAmount.toString().isEmpty()
+
+}

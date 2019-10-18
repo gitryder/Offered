@@ -8,6 +8,12 @@ class MakeDonationPresenter constructor(view: MakeDonationView) {
     private var view: MakeDonationView = view
 
     fun addDonation(donation: Donation) {
+
+        if (donation.isEmpty()) {
+            view.displayNoDonationDetailsAddedMessage()
+            return
+        }
+
         allDonationsList.add(donation)
         view.displayTotalDonationAmount(getCalculatedTotalDonationAmount())
     }

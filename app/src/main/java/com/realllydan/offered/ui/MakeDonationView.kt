@@ -10,4 +10,5 @@ interface MakeDonationView {
 
     fun displayTotalDonationAmount(donationAmount: Int)
 
+    fun displayNoDonationDetailsAddedMessage()
 }

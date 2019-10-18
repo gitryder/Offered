@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.textfield.TextInputEditText
@@ -23,6 +24,7 @@ class MakeDonationActivity : AppCompatActivity(), MakeDonationView {
     }
 
     private val textViewTotalDonationAmount by bind<TextView>(R.id.tvTotalDonatedAmount)
+    private val textViewLinkToAllDonors by bind<TextView>(R.id.tvLinkToAllDonors)
     private val editTextDonorName by bind<TextInputEditText>(R.id.etDonorName)
     private val editTextDonationAmount by bind<TextInputEditText>(R.id.etDonationAmount)
     private val buttonAddDonation by bind<ImageView>(R.id.ivAddToTotalAmount)
@@ -34,10 +36,15 @@ class MakeDonationActivity : AppCompatActivity(), MakeDonationView {
         setContentView(R.layout.activity_make_donation)
 
         wireUpAddDonationButtonToAddNewDonation()
+        decorateLinkTextViewWithUnderline()
     }
 
     override fun displayTotalDonationAmount(donationAmount: Int) {
         textViewTotalDonationAmount.text = donationAmount.toString()
+    }
+
+    override fun displayNoDonationDetailsAddedMessage() {
+        Toast.makeText(this, R.string.message_no_details_typed, Toast.LENGTH_SHORT).show()
     }
 
     private fun clearAllInputFields() {
@@ -63,5 +70,9 @@ class MakeDonationActivity : AppCompatActivity(), MakeDonationView {
     private fun getDonationDetailsFromTextInputs() = Donation().apply {
         donorName = editTextDonorName.text.toString()
         donationAmount = editTextDonationAmount.text.toString().toInt()
+    }
+
+    private fun decorateLinkTextViewWithUnderline() {
+        textViewLinkToAllDonors.paintFlags = Paint.UNDERLINE_TEXT_FLAG
     }
 }

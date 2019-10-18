@@ -7,4 +7,6 @@
     <string name="placeholder_total_donated_amount">0</string>
     <string name="text_view_all_donors">View All Donors</string>
 
+    <string name="message_no_details_typed">Please type all required details</string>
+
 </resources>
