@@ -17,7 +17,7 @@ class MockView : MakeDonationView {
         totalCalculatedDonationAmount = donationAmount
     }
 
-    override fun displayMessageNoDonationDetailsAdded() {
+    override fun displayNoDonationDetailsAddedError() {
         hasDisplayedNoDonationDetailsAddedMessage = true
     }
 

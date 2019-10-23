@@ -5,27 +5,23 @@ import com.realllydan.offered.data.model.Donation
 private const val EMPTY_DONOR_NAME = ""
 private const val EMPTY_DONATION_AMOUNT = 0
 
-private val DONOR_NAME = "Generic Donor Name"
-private val DONATION_AMOUNT = 100
+private const val DONOR_ONE_NAME = "Ross Berry"
+private const val DONATION_ONE_AMOUNT = 100
 
-fun getMockDonationDetails() = Donation().apply {
-    donorName = DONOR_NAME
-    donationAmount = DONATION_AMOUNT
+val EMPTY_DONATION = getEmptyMockDonationDetails()
+val NON_EMPTY_DONATION = getMockDonationDetails()
+val DONATIONS_ARRAY_LIST = getDonationsArrayList()
+
+private fun getMockDonationDetails() = Donation().apply {
+    donorName = DONOR_ONE_NAME
+    donationAmount = DONATION_ONE_AMOUNT
 }
 
-fun getEmptyMockDonationDetails() = Donation().apply {
+private fun getEmptyMockDonationDetails() = Donation().apply {
     donorName = EMPTY_DONOR_NAME
     donationAmount = EMPTY_DONATION_AMOUNT
 }
 
-fun getDonationsArrayList(): ArrayList<Donation> {
-    var allDonationsList = ArrayList<Donation>()
-    allDonationsList.add(Donation(DONOR_NAME, DONATION_AMOUNT))
-    allDonationsList.add(Donation(DONOR_NAME, DONATION_AMOUNT))
-    allDonationsList.add (Donation(DONOR_NAME, DONATION_AMOUNT))
-    return allDonationsList
-}
-
-fun getEmptyDonationsList(): ArrayList<Donation> {
-    return ArrayList<Donation>()
+private fun getDonationsArrayList() = ArrayList<Donation>().apply {
+    add(Donation(DONOR_ONE_NAME, DONATION_ONE_AMOUNT))
 }
