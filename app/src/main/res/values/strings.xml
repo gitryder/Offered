@@ -7,6 +7,9 @@
     <string name="placeholder_total_donated_amount">0</string>
     <string name="text_view_all_donors">View All Donors</string>
 
+    <string name="toolbar_title_make_donations_activity">Offered</string>
+    <string name="toolbar_title_view_donations_activity">All Donors</string>
+
     <string name="message_no_details_typed">Please type all required details</string>
     <string name="message_no_donations_exist">There are no donations yet</string>
 
