@@ -17,5 +17,5 @@
 
 # Download 
 
-<a href="">Click here to download!</a>
+<a href="https://github.com/gitryder/Offered/raw/master/app/release/app-release.apk">Click here to download!</a>
 
