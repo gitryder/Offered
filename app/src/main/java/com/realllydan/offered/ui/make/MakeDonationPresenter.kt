@@ -1,16 +1,29 @@
 package com.realllydan.offered.ui.make
 
+import android.os.Bundle
+import com.realllydan.offered.StateSaveable
 import com.realllydan.offered.data.model.Donation
 
-class MakeDonationPresenter constructor(view: MakeDonationView) {
+private const val KEY_SAVED_DONATION_LIST = "saved_donations_list"
 
-    private val allDonationsList = ArrayList<Donation>()
+class MakeDonationPresenter constructor(view: MakeDonationView) : StateSaveable {
+
+    private var allDonationsList = ArrayList<Donation>()
     private var view: MakeDonationView = view
+
+    override fun savePresenterState(outState: Bundle) {
+        outState.putSerializable(KEY_SAVED_DONATION_LIST, allDonationsList)
+    }
+
+    override fun restorePresenterState(savedInstanceState: Bundle) {
+        allDonationsList = savedInstanceState.getSerializable(KEY_SAVED_DONATION_LIST) as ArrayList<Donation>
+        view.displayTotalDonationAmount(getCalculatedTotalDonationAmount())
+    }
 
     fun addDonation(donation: Donation) {
 
         if (donation.isEmpty()) {
-            view.displayMessageNoDonationDetailsAdded()
+            view.displayNoDonationDetailsAddedError()
             return
         }
 
@@ -33,7 +46,6 @@ class MakeDonationPresenter constructor(view: MakeDonationView) {
         }
         return totalDonationAmount
     }
-
 
 
 }

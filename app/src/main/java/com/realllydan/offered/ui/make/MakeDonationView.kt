@@ -12,7 +12,7 @@ interface MakeDonationView {
 
     fun displayTotalDonationAmount(donationAmount: Int)
 
-    fun displayMessageNoDonationDetailsAdded()
+    fun displayNoDonationDetailsAddedError()
 
     fun displayMessageCannotNavigateSinceEmptyList()
 

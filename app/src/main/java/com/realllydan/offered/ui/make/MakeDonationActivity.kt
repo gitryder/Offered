@@ -3,12 +3,14 @@ package com.realllydan.offered.ui.make
 import android.app.Activity
 import android.graphics.Paint
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import com.google.android.material.textfield.TextInputEditText
 import com.realllydan.offered.R
 import com.realllydan.offered.data.model.Donation
@@ -30,22 +32,31 @@ class MakeDonationActivity : AppCompatActivity(), MakeDonationView {
     private val editTextDonorName by bind<TextInputEditText>(R.id.etDonorName)
     private val editTextDonationAmount by bind<TextInputEditText>(R.id.etDonationAmount)
     private val buttonAddDonation by bind<ImageView>(R.id.ivAddToTotalAmount)
+    private val mToolbar by bind<Toolbar>(R.id.mToolbar)
 
-    private val makeDonationPresenter = MakeDonationPresenter(this)
+    private var makeDonationPresenter = MakeDonationPresenter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_make_donation)
 
+        initToolbar(getString(R.string.toolbar_title_make_donations_activity))
+        initPresenter(savedInstanceState)
+
         setupButtonToAddNewDonation()
         setupTextViewLinkToAllDonations()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        makeDonationPresenter.savePresenterState(outState)
+        super.onSaveInstanceState(outState)
     }
 
     override fun displayTotalDonationAmount(donationAmount: Int) {
         textViewTotalDonationAmount.text = donationAmount.toString()
     }
 
-    override fun displayMessageNoDonationDetailsAdded() {
+    override fun displayNoDonationDetailsAddedError() {
         Toast.makeText(this, R.string.message_no_details_typed, Toast.LENGTH_SHORT).show()
     }
 
@@ -55,6 +66,19 @@ class MakeDonationActivity : AppCompatActivity(), MakeDonationView {
 
     override fun navigateToViewAllDonorsActivity(allDonations: ArrayList<Donation>) {
         startActivity(ViewDonationsActivity.getStartIntent(this, allDonations))
+    }
+
+    private fun initToolbar(title: String) {
+        setSupportActionBar(mToolbar)
+        supportActionBar?.title = title
+    }
+
+    private fun initPresenter(savedInstanceState: Bundle?) {
+        if (savedInstanceState != null) {
+            makeDonationPresenter.restorePresenterState(savedInstanceState)
+            return
+        }
+        makeDonationPresenter = MakeDonationPresenter(this)
     }
 
     private fun clearAllInputFields() {
