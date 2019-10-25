@@ -1,4 +1,8 @@
-# Offered
+# Offered 
+<p>
+  <img src="screenshots/app-logo.png" width="80"/>
+</p>
+
 * An Android application that helps me jot and calculate the donations I collect at my local church
 * It focuses on the calculation of donations and seperates viewing of donors
 
@@ -11,8 +15,8 @@
 
 # Screenshots
 <p>
-  <img src="screenshots/1.png" width="280"/>
-  <img src="screenshots/2.png" width="280"/>
+  <img src="screenshots/make-donation-activity.png" width="280"/>
+  <img src="screenshots/all-donors-activity.png" width="280"/>
 </p>
 
 # Download 
