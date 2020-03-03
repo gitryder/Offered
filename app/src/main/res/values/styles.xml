@@ -9,7 +9,7 @@
     </style>
 
     <style name="MyToolbarTheme" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
-        <item name="android:fontFamily">@font/work_sans_medium</item>
+        <item name="android:fontFamily">@font/roboto</item>
     </style>
 
 </resources>

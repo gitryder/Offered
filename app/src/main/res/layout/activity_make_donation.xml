@@ -25,7 +25,7 @@
         android:id="@+id/tvTotalDonatedAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/work_sans"
+        android:fontFamily="@font/roboto"
         android:text="@string/placeholder_total_donated_amount"
         android:textSize="64sp"
         app:layout_constraintBottom_toTopOf="@+id/tilDonorName"
@@ -40,7 +40,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginBottom="8dp"
         android:background="?attr/selectableItemBackground"
-        android:fontFamily="@font/work_sans_medium"
+        android:fontFamily="@font/roboto_medium"
         android:text="@string/text_view_all_donors"
         android:textColor="@color/textViewLinkColor"
         app:layout_constraintBottom_toTopOf="@+id/tilDonorName"
@@ -63,7 +63,7 @@
             android:id="@+id/etDonorName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/work_sans"
+            android:fontFamily="@font/roboto"
             android:hint="@string/hint_donor_name" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -85,7 +85,7 @@
             android:id="@+id/etDonationAmount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/work_sans"
+            android:fontFamily="@font/roboto"
             android:hint="@string/hint_donation_amount"
             android:inputType="number" />
 
