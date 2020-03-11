@@ -102,8 +102,10 @@ class MakeDonationActivity : AppCompatActivity(), MakeDonationView {
     }
 
     private fun getDonationDetailsFromTextInputs(): Donation {
-        val donorName = editTextDonorName.text.toString()
+        val donorName = getCapitalizedString(editTextDonorName.text.toString())
         val donationAmount = editTextDonationAmount.text.toString()
+
+
 
         return when (donationAmount.isEmpty()) {
             true -> Donation(donorName, Donation.DEFAULT_DONATION_AMOUNT)
@@ -113,5 +115,15 @@ class MakeDonationActivity : AppCompatActivity(), MakeDonationView {
 
     private fun decorateLinkTextViewWithUnderline() {
         textViewLinkToAllDonors.paintFlags = Paint.UNDERLINE_TEXT_FLAG
+    }
+
+    private fun getCapitalizedString(rawString: String): String {
+        val words = rawString.split(" ").toMutableList();
+        var output = ""
+
+        for(word in words) {
+            output += word.capitalize() + " "
+        }
+        return output.trim()
     }
 }

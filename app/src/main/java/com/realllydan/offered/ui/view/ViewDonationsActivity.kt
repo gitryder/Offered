@@ -3,15 +3,18 @@ package com.realllydan.offered.ui.view
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.realllydan.offered.R
 import com.realllydan.offered.data.adapters.AllDonationsAdapter
 import com.realllydan.offered.data.model.Donation
+import com.realllydan.offered.ui.make.MakeDonationPresenter
 
-class ViewDonationsActivity : AppCompatActivity() {
+class ViewDonationsActivity : AppCompatActivity(), AllDonationsView {
 
     companion object {
         private const val ALL_DONATIONS_KEY = "all_donations"
@@ -28,6 +31,8 @@ class ViewDonationsActivity : AppCompatActivity() {
             ?: throw IllegalStateException("Must call through getStartIntent()")
     }
 
+    private var viewDonationsPresenter = ViewDonationsPresenter(this)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_view_donations)
@@ -36,8 +41,17 @@ class ViewDonationsActivity : AppCompatActivity() {
         setupRecyclerView()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_view_donations, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == android.R.id.home) onBackPressed()
+        when {
+            item.itemId == android.R.id.home -> onBackPressed()
+            item.itemId == R.id.action_share_donations ->
+                viewDonationsPresenter.shareAllDonations(allDonationsList)
+        }
         return true
     }
 
@@ -54,5 +68,9 @@ class ViewDonationsActivity : AppCompatActivity() {
         val donationsAdapter = AllDonationsAdapter(allDonationsList)
         recyclerView.adapter = donationsAdapter
         recyclerView.layoutManager = LinearLayoutManager(this)
+    }
+
+    override fun beginShareDonationsIntent(shareIntent: Intent) {
+        startActivity(Intent.createChooser(shareIntent, "Share Using"))
     }
 }

@@ -18,7 +18,7 @@ class AllDonationsAdapter(allDonationsList: ArrayList<Donation>) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.tvDonorName.text = allDonationsList[position].donorName + " ∙"
+        holder.tvDonorName.text = allDonationsList[position].donorName
         holder.tvDonationAmount.text = allDonationsList[position].donationAmount.toString()
     }
 
