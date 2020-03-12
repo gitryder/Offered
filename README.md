@@ -3,6 +3,10 @@
   <img src="screenshots/app-logo.png" width="80"/>
 </p>
 
+<p>
+  <img src="screenshots/google-play-badge.png" width="200"/>
+</p>
+
 * An Android application that helps me jot and calculate the donations I collect at my local church
 * It focuses on the calculation of donations and seperates viewing of donors
 
